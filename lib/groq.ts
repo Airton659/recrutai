@@ -42,21 +42,19 @@ export function textQualityOk(text: string): { ok: boolean; reason?: string } {
 }
 
 export async function extractDados(text: string) {
-  const response = await groq.chat.completions.create({
-    model: MODEL,
+  const response = await anthropic.messages.create({
+    model: 'claude-haiku-4-5-20251001',
+    max_tokens: 1024,
+    system: `Você é um algoritmo ATS. Extraia dados do currículo e responda SOMENTE com um objeto JSON válido, sem nenhum texto antes ou depois. Use null para campos não encontrados. NUNCA invente informações.`,
     messages: [
-      {
-        role: 'system',
-        content: `Você é um algoritmo ATS. Extraia dados do currículo e responda SOMENTE com um objeto JSON válido, sem nenhum texto antes ou depois. Use null para campos não encontrados. NUNCA invente informações.`,
-      },
       {
         role: 'user',
         content: `Extraia do currículo abaixo e retorne APENAS o JSON:\n\n${text.substring(0, 8000)}\n\nFormato obrigatório:\n{\n  "nome": null,\n  "email": null,\n  "telefone": null,\n  "cidade": null,\n  "data_nascimento": null,\n  "formacao": null,\n  "historico": null,\n  "habilidades": ["habilidade1", "habilidade2"]\n}\n\nRegras para habilidades:\n- Array de strings, uma por item\n- Apenas o nome da habilidade, sem categorias ou prefixos\n- Extraia do CV: ferramentas, metodologias, plataformas, técnicas, idiomas\n- Máximo 20 itens`,
       },
     ],
-    temperature: 0.0,
   })
-  return parseJSON(response.choices[0].message.content || '{}')
+  const block = response.content[0]
+  return parseJSON(block.type === 'text' ? block.text : '{}')
 }
 
 export async function summarizeCandidate(dados: Record<string, unknown>) {
