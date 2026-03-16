@@ -51,7 +51,7 @@ export async function extractDados(text: string) {
       },
       {
         role: 'user',
-        content: `Extraia do currículo abaixo e retorne APENAS o JSON, nada mais:\n\n${text.substring(0, 8000)}\n\nFormato obrigatório:\n{"nome":null,"email":null,"telefone":null,"cidade":null,"data_nascimento":null,"formacao":null,"historico":null,"habilidades":null}`,
+        content: `Extraia do currículo abaixo e retorne APENAS o JSON:\n\n${text.substring(0, 8000)}\n\nFormato obrigatório:\n{\n  "nome": null,\n  "email": null,\n  "telefone": null,\n  "cidade": null,\n  "data_nascimento": null,\n  "formacao": null,\n  "historico": null,\n  "habilidades": ["habilidade1", "habilidade2"]\n}\n\nRegras para habilidades:\n- Array de strings, uma por item\n- Apenas o nome da habilidade, sem categorias ou prefixos\n- Extraia do CV: ferramentas, metodologias, plataformas, técnicas, idiomas\n- Máximo 20 itens`,
       },
     ],
     temperature: 0.0,
@@ -288,8 +288,11 @@ function toStr(val: unknown): string | null {
       .join('\n')
   }
   if (typeof val === 'object') {
-    return Object.entries(val as Record<string, unknown>)
-      .map(([k, v]) => `${k}: ${v}`)
+    // Extract all leaf values, ignoring internal keys
+    return Object.values(val as Record<string, unknown>)
+      .flatMap((v) => (Array.isArray(v) ? v : [v]))
+      .map((v) => (typeof v === 'string' ? v : String(v)))
+      .filter(Boolean)
       .join(', ')
   }
   return String(val)
