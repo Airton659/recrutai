@@ -7,7 +7,8 @@ export default function NovaVaga() {
   const router = useRouter()
   const [nomeVaga, setNomeVaga] = useState('')
   const [descricaoVaga, setDescricaoVaga] = useState('')
-  const [tipoVaga, setTipoVaga] = useState('Dev')
+  const [tipoVaga, setTipoVaga] = useState('Closer')
+  const [tipoVagaCustom, setTipoVagaCustom] = useState('')
   const [files, setFiles] = useState<File[]>([])
   const [loading, setLoading] = useState(false)
   const [progress, setProgress] = useState('')
@@ -42,7 +43,7 @@ export default function NovaVaga() {
     const formData = new FormData()
     formData.append('nome_vaga', nomeVaga)
     formData.append('descricao_vaga', descricaoVaga)
-    formData.append('tipo_vaga', tipoVaga)
+    formData.append('tipo_vaga', tipoVaga === 'Outros' ? (tipoVagaCustom.trim() || 'Outros') : tipoVaga)
     files.forEach((f) => formData.append('cvs', f))
 
     try {
@@ -112,12 +113,24 @@ export default function NovaVaga() {
               className="w-full border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent bg-white"
               disabled={loading}
             >
-              <option value="Dev">Dev (Backend / Frontend / Fullstack)</option>
-              <option value="Designer">Designer</option>
-              <option value="Gestor de Tráfego">Gestor de Tráfego</option>
-              <option value="SDR">SDR</option>
               <option value="Closer">Closer</option>
+              <option value="SDR">SDR</option>
+              <option value="Copywriter">Copywriter</option>
+              <option value="Gestor de Tráfego">Gestor de Tráfego</option>
+              <option value="Designer">Designer</option>
+              <option value="Dev">Dev (Backend / Frontend / Fullstack)</option>
+              <option value="Outros">Outros</option>
             </select>
+            {tipoVaga === 'Outros' && (
+              <input
+                type="text"
+                value={tipoVagaCustom}
+                onChange={(e) => setTipoVagaCustom(e.target.value)}
+                placeholder="Ex: Assistente de RH, Analista Financeiro..."
+                className="mt-2 w-full border border-slate-200 rounded-lg px-4 py-2.5 text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                disabled={loading}
+              />
+            )}
           </div>
 
           <div>

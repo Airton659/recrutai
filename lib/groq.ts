@@ -125,6 +125,11 @@ GESTOR DE TRÁFEGO
   Hard: plataformas (Meta Ads, Google Ads, etc.), análise de métricas, gestão de budget, CRO, UTM/tracking
   Soft: pensamento analítico, organização, proatividade, comunicação com cliente
 
+COPYWRITER
+  Hard Skills: 60% | Soft Skills: 40%
+  Hard: redação persuasiva, SEO/copywriting, storytelling, domínio de plataformas (RD Station, Mailchimp, etc.), conhecimento de funil de vendas, métricas de conteúdo
+  Soft: criatividade, escrita clara, receptividade a feedback, organização, atenção a prazo
+
 SDR
   Hard Skills: 40% | Soft Skills: 60%
   Hard: CRM (HubSpot, Salesforce, Pipedrive, etc.), cadências, ferramentas de prospecção (Apollo, LinkedIn Sales Navigator, etc.)
@@ -134,6 +139,12 @@ CLOSER
   Hard Skills: 40% | Soft Skills: 60%
   Hard: CRM, conhecimento de funil, metodologias de vendas (SPIN, BANT, Challenger, etc.)
   Soft: persuasão, inteligência emocional, gestão de objeções, foco em resultado, comunicação
+
+OUTROS
+  Hard Skills: 50% | Soft Skills: 50%
+  Hard: ferramentas, plataformas, conhecimentos técnicos e certificações mencionados na vaga
+  Soft: competências comportamentais mencionadas ou implícitas na vaga
+  Obs: penalidade P1 não se aplica a este tipo — não há ferramenta core universal definida
 
 ═══════════════════════════════════════════
 FASE 1 — EXTRAÇÃO (obrigatória antes de avaliar)
@@ -177,6 +188,7 @@ FASE 3 — PENALIDADES
 P1 — FERRAMENTA/LINGUAGEM CORE AUSENTE
    Se a vaga exige uma ferramenta ou linguagem central E o candidato não a possui com experiência comprovada → nota de hard skills limitada a 4.
    Exemplos: vaga Dev Python sem Python no histórico; vaga Gestor sem Meta Ads ou Google Ads.
+   Não se aplica ao tipo OUTROS.
 
 P2 — SENIORIDADE
    Vaga sênior (5+ anos) e candidato com menos de 3 anos → desconta 2 pontos da nota final.
